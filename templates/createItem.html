@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Create an Item{% endblock %}
+{% block content %}
+<form action="{{url_for('createItem')}}" method="POST">
+	<fieldset>
+		<legend>Create a new item.</legend>
+		<label for="name">Name:</label><br>
+		<input type="text" name="name" required><br>
+		<label for="description">Description:</label><br>
+		<textarea class="form-control" maxlength="250" rows="3" name="description" required></textarea><br>
+		<label for="category">Category:</label><br>
+		<input type="text" name="category" required><br>
+		<input type="submit" value="Submit">
+	</fieldset>
+</form>
+
+{% endblock %}

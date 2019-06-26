@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}Catalog{% endblock %}
+{% block content %}
+<section>
+	<ul>
+		{% for category in categories %}
+			<li><a href={{url_for('showCategory', category = category)}}>{{category}}</a></li>
+		{% endfor %}
+	</ul>
+</section>
+<section>
+	{% if entry != None %}
+		<h1>{{entry.name}}</h1>
+		<p>{{entry.description}}</p>
+		{% if login_session['email'] == entry.user_email %}
+			<br><br>
+			<a href={{url_for('editItem', category = entry.category, item = entry.name)}}>edit</a>
+			<a href={{url_for('deleteItem', category = entry.category, item = entry.name)}}>delete</a>
+		{% endif %}
+	{% else %}
+	<ul>
+		{% for item in items %}
+			<li><a href={{url_for('showCategory', category = item.category, item = item.name)}}>{{item.name}}</a>
+			{% if login_session['email'] == item.user_email %}
+				<a href={{url_for('editItem', category = item.category, item = item.name)}}>edit</a>
+				<a href={{url_for('deleteItem', category = item.category, item = item.name)}}>delete</a>
+			{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</section>
+{% endblock %}
