@@ -43,4 +43,4 @@ Zachary Dumas - https://github.com/zacharydumas
 
 ----------------------------------
 ## Acknowledgements
-Initial commit comes from [Zachary Dumas' Sports Catalog Project]https://github.com/zacharydumas/fullstack-nanodegree-vm)
+Initial commit comes from [Zachary Dumas' Sports Catalog Project](https://github.com/zacharydumas/fullstack-nanodegree-vm)
