@@ -20,7 +20,7 @@ It features:
 * `cd` to the home directory on your server
 * `clone` this repository
 * run `sudo nano /etc/apache2/sites-enabled/000-default.conf`
-* add the line "WSGIScriptAlias / /home/ubuntu/udacity-linux-configuration/catalog.wsgi" within the <VirtualHost> tag
+* add the line "WSGIScriptAlias / /home/ubuntu/udacity-linux-configuration/catalog.wsgi" within the VirtualHost tag
 * save the changes and exit the file
 * `sudo -u postgres psql`
 * `postgres=# create database catalog;`
