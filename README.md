@@ -14,11 +14,13 @@ It features:
 * [Postgres](https://www.postgresql.org)
 * [Flask](flask.pocoo.org)
 * [Sqlalchemy](https://www.sqlalchemy.org)
+* [Google OAuth credentials](https://console.developers.google.com)
 ------------------------------
 
 ## Installation
 * `cd` to the home directory on your server
-* `clone` this repository
+* `clone` this repository as "udacity-linux-configuration"
+* `cd udacity-linux-configuration` 
 * run `sudo nano /etc/apache2/sites-enabled/000-default.conf`
 * add the line "WSGIScriptAlias / /home/ubuntu/udacity-linux-configuration/catalog.wsgi" within the VirtualHost tag
 * save the changes and exit the file
@@ -26,6 +28,7 @@ It features:
 * `postgres=# create database catalog;`
 * `postgres=# create user catalog withpassword 'password';`
 * `postgres=# grant all privileges on database catalog to catalog;`
+* copy your OAuth credentials into the "udacity-linux-configuration" directory with the name "client_secrets.json"
 * run `python catalog_database.py` to create the database.
 
 -----------------------------------
