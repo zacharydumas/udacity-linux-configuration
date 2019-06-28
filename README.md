@@ -48,4 +48,4 @@ Zachary Dumas - https://github.com/zacharydumas
 ----------------------------------
 ## Acknowledgements
 Initial commit comes from [Zachary Dumas' Sports Catalog Project](https://github.com/zacharydumas/fullstack-nanodegree-vm)
-Solution to pip error fount at [Stack Exchange](https://stackoverflow.com/questions/28253681/you-need-to-install-postgresql-server-dev-x-y-for-building-a-server-side-extensi)
+Solution to pip error found at [Stack Exchange](https://stackoverflow.com/questions/28253681/you-need-to-install-postgresql-server-dev-x-y-for-building-a-server-side-extensi)
