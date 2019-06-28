@@ -45,5 +45,5 @@ class CatalogItem(Base):
 
 
 # Bind to the database and create the tables
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine('postgresql://catalog:password@localhost/catalog')
 Base.metadata.create_all(engine)

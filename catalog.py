@@ -19,10 +19,11 @@ import requests
 import json
 
 app = Flask(__name__)
-
+app.debug = True
+app.secret_key = 'secret key'
 # Connect to Database and create database session
 engine = create_engine(
-    'sqlite:///catalog.db', connect_args={'check_same_thread': False}
+    'postgresql://catalog:password@localhost/catalog'
     )
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
@@ -65,9 +66,9 @@ def showCategory(category=None, item=None):
 
 @app.route('/new', methods=['GET', 'POST'])
 def createItem():
-    if login_session['email'] is not None:
+    if login_session.get('email') is not None:
         if request.method == 'POST':
-            if login_session['email'] is not None:
+            if login_session.get('email') is not None:
                 newItem = CatalogItem(
                     name=request.form['name'],
                     description=request.form['description'],
@@ -98,7 +99,7 @@ def createItem():
 
 @app.route('/<category>/<item>/edit', methods=['GET', 'POST'])
 def editItem(category, item):
-    if login_session['email'] is not None:
+    if login_session.get('email') is not None:
         if request.method == 'POST':
             item = session.query(CatalogItem).filter_by(
                 category=category, name=item
@@ -131,7 +132,7 @@ def editItem(category, item):
 
 @app.route('/<category>/<item>/delete', methods=['GET', 'POST'])
 def deleteItem(category, item):
-    if login_session['email'] is not None:
+    if login_session.get('email') is not None:
         if request.method == 'POST':
             itemName = item
             if session.query(CatalogItem).filter_by(
@@ -201,10 +202,10 @@ def itemJson(category, item):
 @app.route('/login')
 def login():
     flow = flow_from_clientsecrets(
-        'client_secrets.json',
+        '/home/ubuntu/udacity-linux-configuration/client_secrets.json',
         scope=scope,
-        redirect_uri=url_for('connect', _external=True)
-        )
+        redirect_uri = 'http://3.220.93.200.xip.io/connect'
+	)
     return redirect(flow.step1_get_authorize_url())
 
 # POST logs the user in
@@ -213,7 +214,7 @@ def login():
 @app.route('/connect', methods=['Get', 'POST'])
 def connect():
     flow = flow_from_clientsecrets(
-        'client_secrets.json',
+        '/home/ubuntu/udacity-linux-configuration/client_secrets.json',
         scope=scope,
         redirect_uri=url_for('connect', _external=True))
     # exchange the token for credentials
@@ -235,6 +236,10 @@ def connect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
     login_session['access_token'] = credentials.access_token
+    if session.query(User).filter_by(email=login_session['email']).count() == 0:
+	newUser = User(email=login_session['email'],name=login_session['name'],picture=login_session['picture'])
+	session.add(newUser)
+	session.commit()
     flash('logged in as ' + login_session['name'])
     return redirect(url_for('showCategory'))
 
